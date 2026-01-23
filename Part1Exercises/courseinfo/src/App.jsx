@@ -17,10 +17,8 @@ const App = () => {
   return (
     <>
       <Header title = {course} />
-      <Content  part = {parts[0]} />
-      <Content  part = {parts[1]} />
-      <Content  part = {parts[2]} />
-      <Total    first = {parts[0].noOfExercies} second = {parts[1].noOfExercies} third = {parts[2].noOfExercies}/>
+      <Content  part = {parts} />
+      <Total  first = {parts[0].noOfExercies} second = {parts[1].noOfExercies} third = {parts[2].noOfExercies}/>
     </>
     
   )
@@ -38,6 +36,15 @@ const Header = (prop) => {
   )
 
 }
+const Part = (prop) => {
+  console.log("hi from parts")
+  return (
+    <div>
+          {prop.name} -
+          {prop.exerciesNo}
+    </div>
+  )
+}
 
 const Content = ({part}) => {
   console.log(part.name)
@@ -45,9 +52,14 @@ const Content = ({part}) => {
   <>
     <ul>
       <li>
-         name = {part.name}
+        <Part name = {part[0].name} exerciesNo = {part[0].noOfExercies}/>
       </li>
-      number of exercies = {part.noOfExercies} 
+      <li>
+        <Part name = {part[1].name} exerciesNo = {part[1].noOfExercies}/>
+      </li>
+      <li>
+        <Part name = {part[2].name} exerciesNo = {part[2].noOfExercies}/>
+      </li>
     </ul>
   </>
   )
