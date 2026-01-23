@@ -1,35 +1,65 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+const App = () => {
+  console.log("hello from app ")
+  const course = 'Half Stack application development'
 
-function App() {
-  const [count, setCount] = useState(0)
+  const parts = [
+    {name : "Fundamentals of React" ,
+      noOfExercies: 10
+    },
+    {name : "Using props to pass data" ,
+      noOfExercies: 7
+    },
+    {name : "State of a component" ,
+      noOfExercies: 14
+    }
+  ]
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header title = {course} />
+      <Content  part = {parts[0]} />
+      <Content  part = {parts[1]} />
+      <Content  part = {parts[2]} />
+      <Total    first = {parts[0].noOfExercies} second = {parts[1].noOfExercies} third = {parts[2].noOfExercies}/>
     </>
+    
   )
 }
+
+const Header = (prop) => {
+  console.log("hi from header")
+  return (
+    <>
+      <h1>
+        Title : {prop.title}
+      </h1>
+
+    </>
+  )
+
+}
+
+const Content = ({part}) => {
+  console.log(part.name)
+  return (
+  <>
+    <ul>
+      <li>
+         name = {part.name}
+      </li>
+      number of exercies = {part.noOfExercies} 
+    </ul>
+  </>
+  )
+
+} 
+const Total = (prop) => {
+  console.log("hi from total")
+  return (
+    <>
+      <p> total number of exercies = {prop.first} + {prop.second} + {prop.third}  = {prop.first + prop.second + prop.third} </p>
+    </>
+  )
+} 
 
 export default App
