@@ -21,8 +21,8 @@ const App = () => {
   return (
     <div>
       <Header course={course} />
-      <Content parts={course} />
-      <Total parts={course} />
+      <Content course={course} />
+      <Total course={course} />
     </div>
   )
 }
@@ -30,7 +30,7 @@ const Header = (prop) => {
   return (
     <>
     <h1>
-      {prop.course}
+      {prop.course.name}
     </h1>
     
     </>
@@ -38,7 +38,7 @@ const Header = (prop) => {
 
 }
 const Content = (prop) => {
-  const content = prop.parts.map((value) => 
+  const content = prop.course.parts.map((value) => 
     <li>
       {value.name}-{value.exercises}
     </li>
@@ -53,11 +53,11 @@ const Content = (prop) => {
 
 }
 const Total = (prop) => {
-  const total = prop.parts[0].exercises +prop.parts[1].exercises +prop.parts[2].exercises
+  const total = prop.course.parts[0].exercises +prop.course.parts[1].exercises +prop.course.parts[2].exercises
   return (
     <>
     <p>
-      Total = {prop.parts[0].exercises} + {prop.parts[1].exercises}+ {prop.parts[2].exercises} = {total}
+      Total = {prop.course.parts[0].exercises} + {prop.course.parts[1].exercises}+ {prop.course.parts[2].exercises} = {total}
     </p>
     </>
   )
