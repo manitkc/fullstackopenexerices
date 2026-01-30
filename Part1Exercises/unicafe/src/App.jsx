@@ -29,7 +29,7 @@ function App() {
     <Button onClick={onHandleNeutralButton} text="Neutral"/>
     <Button onClick={onHandleBadButton} text="Bad"/>
     <StatisticsHeader/>
-    <StatisitcsInfo good={good} neutral={neutral} bad={bad} review ={review}/>
+    <Statisitcs good={good} neutral={neutral} bad={bad} review ={review}/>
     </>
   )
 }
@@ -40,7 +40,7 @@ const Button = ({onClick,text}) => <button onClick = {onClick}> {text} </button>
 
 const StatisticsHeader = () => <h2>Statistics</h2>
 
-const StatisitcsInfo = ({good ,neutral , bad , review}) => {
+const Statisitcs = ({good ,neutral , bad , review}) => {
   let average = 0
   if (review.length===0) {
     average = 0
