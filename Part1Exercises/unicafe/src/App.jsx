@@ -29,6 +29,9 @@ function App() {
     <Button onClick={onHandleNeutralButton} text="Neutral"/>
     <Button onClick={onHandleBadButton} text="Bad"/>
     <StatisticsHeader/>
+    <StatisticLine text="good" value={good} />
+    <StatisticLine text="neutral" value={neutral} />
+    <StatisticLine text="bad" value={bad} />
     <Statisitcs good={good} neutral={neutral} bad={bad} review ={review}/>
     </>
   )
@@ -39,6 +42,17 @@ const Header = () => <h2>give feedback</h2>
 const Button = ({onClick,text}) => <button onClick = {onClick}> {text} </button>
 
 const StatisticsHeader = () => <h2>Statistics</h2>
+
+const StatisticLine = ({text,value}) => {
+  return (
+    <>
+      <p>
+        {text} : {value}
+      </p>
+    </>
+  )
+}
+
 
 const Statisitcs = ({good ,neutral , bad , review}) => {
   let average = 0
@@ -57,15 +71,6 @@ const Statisitcs = ({good ,neutral , bad , review}) => {
   }
   return (
     <>
-    <p>
-     good:{good}
-    </p>
-    <p>
-     neutral:{neutral}
-    </p>
-    <p>
-     bad:{bad}
-    </p>
      <p>
      all:{bad+good+neutral}
     </p>
