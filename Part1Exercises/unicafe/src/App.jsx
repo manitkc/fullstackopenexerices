@@ -46,9 +46,14 @@ const StatisticsHeader = () => <h2>Statistics</h2>
 const StatisticLine = ({text,value}) => {
   return (
     <>
-      <p>
-        {text} : {value}
-      </p>
+      <table>
+        <tbody>
+          <tr>
+            <td>{text}</td>
+            <td>{value}</td>
+          </tr>
+        </tbody>
+      </table>
     </>
   )
 }
@@ -59,7 +64,7 @@ const Statisitcs = ({good ,neutral , bad , review}) => {
   if (review.length===0) {
     average = 0
   } else {
-    average =  (good - bad) / review.length
+    average = (good - bad) / review.length
   }
 
   if (review.length === 0) {
@@ -71,16 +76,23 @@ const Statisitcs = ({good ,neutral , bad , review}) => {
   }
   return (
     <>
-     <p>
-     all:{bad+good+neutral}
-    </p>
-     <p>
-     average:{average} 
-    </p>
-     <p>
-      postive ={(good /review.length)*100}
-    </p>
-
+    <table>
+      <tbody>
+        <tr>
+          <td>all</td>
+          <td>{bad+good+neutral}</td>
+        </tr>
+        <tr>
+          <td>average</td>
+          <td>{average}</td>
+        </tr>
+        <tr>
+          <td>postive</td>
+          <td>{(good /review.length)*100}%</td>
+        </tr>
+      </tbody>
+    
+    </table>
     </>
   )
 }
