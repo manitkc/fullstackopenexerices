@@ -47,6 +47,14 @@ const Statisitcs = ({good ,neutral , bad , review}) => {
   } else {
     average =  (good - bad) / review.length
   }
+
+  if (review.length === 0) {
+    return (
+      <>
+        <h5>No Feedback given</h5>
+      </>
+    )
+  }
   return (
     <>
     <p>
