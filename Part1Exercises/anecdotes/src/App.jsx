@@ -28,6 +28,15 @@ const onHandleVotedAnnecdote = () => {
   copyVotes[selected] += 1
   setVotes(copyVotes)
 }
+const findMaxVote = () => Math.max(...votes)
+
+
+const findMostVotedAnnecdote = () => {
+  const maxVote = findMaxVote()
+  if (maxVote ===0) return null 
+  const index = votes.indexOf(maxVote)
+  return anecdotes[index] 
+}
 
 console.log(selected , votes[selected])
 
@@ -38,6 +47,7 @@ console.log(selected , votes[selected])
       </div>
       <Button onClick = {onHandleVotedAnnecdote} text="vote"/>
       <Button onClick ={onNextAnecdote} text="next anecdote"/>
+      <DisplayMostPopularAnnecdote noOfVotes= {findMaxVote()} anecdote ={findMostVotedAnnecdote()} />
     </>
   )
 }
@@ -45,6 +55,26 @@ console.log(selected , votes[selected])
 const Button = ({onClick , text}) =>  {
   return (
 <button onClick={onClick}>{text}</button>
+  )
+}
+
+const DisplayMostPopularAnnecdote = ({noOfVotes, anecdote}) => {
+ const displayNoOfVotes = () => {
+  if (noOfVotes === 0) {
+    return (
+      <>
+      </>
+    )
+  } else  return (<p> has {noOfVotes} votes</p>)
+ }
+  return (
+    <>
+      <h3>
+        Anecdotes with most votes
+      </h3>
+      <p>{anecdote}</p>
+      {displayNoOfVotes()}
+    </>
   )
 }
 
