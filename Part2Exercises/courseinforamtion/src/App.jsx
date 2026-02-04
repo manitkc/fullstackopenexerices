@@ -31,7 +31,7 @@ const Course = ({course}) => {
     <>
       <Header name = {course.name}/>
       <Content content = {course.parts}/>
-      <Total partsArray = {course.parts}/>
+      <Total parts = {course.parts}/>
     </>
   )
 }
@@ -56,14 +56,12 @@ const Part = ({name ,exercisesNo }) => {
   )
 }
 
-const Total = ({partsArray}) => {
-  let sum = 0
-  partsArray.forEach((part) => {
-    sum += part.exercises
-  })
+const Total = ({parts}) => {
+  let intialValue = 0 
+  const total = parts.reduce((sum , part ) =>  sum + part.exercises, intialValue)
   return (
     <>
-    <p> <strong>total of {sum} exercises</strong></p>
+    <p> total of {total} exercises</p>
     </>
   )
 }
