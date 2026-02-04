@@ -31,6 +31,7 @@ const Course = ({course}) => {
     <>
       <Header name = {course.name}/>
       <Content content = {course.parts}/>
+      <Total partsArray = {course.parts}/>
     </>
   )
 }
@@ -38,7 +39,8 @@ const Course = ({course}) => {
 const Header = ({name}) => <h1>{[name]}</h1>
 
 const Content = ({content}) => {
-  console.log (content)
+
+
   return (
     <>
     {content.map((part) => 
@@ -51,6 +53,18 @@ const Part = ({name ,exercisesNo }) => {
   console.log("hi from part ")
   return (
     <div>{name} {exercisesNo}</div>
+  )
+}
+
+const Total = ({partsArray}) => {
+  let sum = 0
+  partsArray.forEach((part) => {
+    sum += part.exercises
+  })
+  return (
+    <>
+    <p> <strong>total of {sum} exercises</strong></p>
+    </>
   )
 }
 
