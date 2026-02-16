@@ -1,17 +1,27 @@
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
+import axios from 'axios'
 import Phonebook from './components/Phonebook.jsx'
 import Person from './components/Person.jsx'
 import PersonForm from './components/PersonForm.jsx'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
-
   const [newName, setNewName] = useState("")
   const [newNumber , setNewNumber ] = useState("")
   const [filterName , setFilterName ] = useState("")
   const [showFilter , setShowFilter] = useState(false)
 
-  
+
+  const hook = () => {
+    console.log("effect")
+    axios.get("http://localhost:3001/persons").then((response) => {
+      console.log (response.data)
+      setPersons(response.data )
+    })
+  }
+
+  useEffect(hook , [])
+
   const showFilterName = showFilter
   ? persons.filter(person => person.name.toLowerCase().startsWith(filterName.toLowerCase())) 
   : persons
