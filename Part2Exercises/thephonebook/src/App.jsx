@@ -53,20 +53,20 @@ const App = () => {
       id : persons.length +1 
     }
 
-    const nameExists = persons.some((person) => 
-      person.name === newName
-    )
-
-    if (nameExists) {
-      alert(`${newName} is already added to the phonebook`)
-      return 
-    }
-    setPersons(persons.concat(
-      PersonObject
-  ))
-    setNewName("")
-    setNewNumber("")
-  }
+    axios.post("http://localhost:3001/persons", PersonObject)
+          .then(response => {
+              const nameExists = persons.some((person) => 
+              person.name === newName
+            )
+            if (nameExists) {
+              alert(`${newName} is already added to the phonebook`)
+              return 
+            }
+            setPersons(persons.concat(PersonObject))
+            setNewName("")
+            setNewNumber("")
+            })
+      }
 
   return (
     <div>
