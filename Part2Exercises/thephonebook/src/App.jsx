@@ -50,14 +50,32 @@ const App = () => {
       name: newName ,
       number : newNumber ,
     }
+    
     const nameExists = persons.some((person) => 
               person.name === newName
     )
 
     if (nameExists) {
-      alert(`${newName} is already added to the phonebook`)
+      // grab the id of name 
+      alert(`${newName} is already added to phonebook, replace the old with a new one`)
+      const foundPerson  = persons.find(person => person.name  ===  newName)
+
+      const changedPersonObject = {...foundPerson,
+                                      number: newNumber
+                                  }
+  
+      axios.put(`http://localhost:3001/persons/${foundPerson.id}`, changedPersonObject).then(response => {
+        setPersons(persons.map(person => person.id === foundPerson.id
+          ? response.data 
+          : person
+        ))
+      })
+      setNewName("")
+      setNewNumber("")
       return 
     }
+
+
     axios.post("http://localhost:3001/persons", PersonObject)
           .then(response => {
             setPersons(persons.concat(response.data))
