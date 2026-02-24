@@ -40,7 +40,6 @@ const App = () => {
   }
 
   const handleNewNumber = (event) => {
-    console.log(event.target.value)
     setNewNumber(event.target.value)
 }
 
@@ -50,24 +49,34 @@ const App = () => {
     const PersonObject = {
       name: newName ,
       number : newNumber ,
-      id : persons.length +1 
     }
+    const nameExists = persons.some((person) => 
+              person.name === newName
+    )
 
+    if (nameExists) {
+      alert(`${newName} is already added to the phonebook`)
+      return 
+    }
     axios.post("http://localhost:3001/persons", PersonObject)
           .then(response => {
-              const nameExists = persons.some((person) => 
-              person.name === newName
-            )
-            if (nameExists) {
-              alert(`${newName} is already added to the phonebook`)
-              return 
-            }
-            setPersons(persons.concat(PersonObject))
+            setPersons(persons.concat(response.data))
             setNewName("")
             setNewNumber("")
             })
       }
 
+  const onHandleDelete = id => {
+    axios.delete(`http://localhost:3001/persons/${id}`).then(response => {
+      setPersons(persons.filter(person=> person.id !== id))
+    })
+    .catch(error => {
+      alert ("This person was already removed from the server")
+      setPersons(persons.filter(person=> person.id !== id))
+    }
+      
+    )
+  }
   return (
     <div>
       <h2>Phonebook</h2>
@@ -80,7 +89,11 @@ const App = () => {
                   number = {newNumber}/>
       <h2>Numbers</h2>
       {showFilterName.map((person) => (
-        <Person key= {person.id} name = {person.name} number = {person.number}/>
+        <Person 
+          key= {person.id} 
+          name = {person.name} 
+          number = {person.number} 
+          onHandleDelete={()=> onHandleDelete(person.id)}/>
        ))}
     </div>
   )
